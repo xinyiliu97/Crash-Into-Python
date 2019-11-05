@@ -1,4 +1,4 @@
-from .BasicData import *
+#from .BasicData import *
 
 
 #########################################
@@ -11,7 +11,10 @@ from .BasicData import *
 # `1 < 2` will be equal to `True`
 # `1 < 1` will be equal to `False`
 def my_abs(n):
-    pass  # your solution here.
+    if n >= 0:
+        return n
+    else:
+        return -n
 
 
 # determine if a year is leap year
@@ -24,7 +27,17 @@ def my_abs(n):
 # `leap_year(1000)` should equal to `False`
 # `leap_year(2000)` should equal to `True`
 def leap_year(year):
-    pass  # your solution here.
+    if year % 4 == 0:
+        if year % 100 == 0:
+            if year % 400 == 0:
+                return True
+            else:
+                return False
+        else: 
+            return True
+    else:
+        return False
+
 
 
 # implementing exclusive or of two boolean
@@ -34,7 +47,11 @@ def leap_year(year):
 # `xor(True, False)` should equal to `True`
 # `xor(False, False)` should equal to `False`
 def xor(b1, b2):
-    pass  # your solution here
+    if b1 == b2:
+        return False
+    else:
+        return True
+
 
 
 # here is what get executed when you run the script
