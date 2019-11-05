@@ -27,14 +27,12 @@ def my_abs(n):
 # `leap_year(1000)` should equal to `False`
 # `leap_year(2000)` should equal to `True`
 def leap_year(year):
-    if year % 4 == 0:
-        if year % 100 == 0:
-            if year % 400 == 0:
-                return True
-            else:
-                return False
-        else: 
-            return True
+    if year % 400 == 0:
+        return True
+    elif year % 100 == 0:
+        return False
+    elif year % 4 == 0:
+        return True
     else:
         return False
 
