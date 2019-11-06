@@ -84,7 +84,6 @@ def bad_double_list(l):
 
     >>> bad_double_list([1, 2, 3])
     [2, 4, 6]
-
     >>> bad_double_list([-2, 0, 1.3])
     [-4, 0, 2.6]
 
@@ -182,7 +181,6 @@ def better_double_list(l):
 
     >>> better_double_list([1, 2, 3])
     [2, 4, 6]
-
     >>> better_double_list([-2, 0, 1.3])
     [-4, 0, 2.6]
 
@@ -196,7 +194,7 @@ def better_double_list(l):
     # to each element of l
     # notice that you cannot put parenthesis after `double`
     # since that will invoke the function, but not send the function in as input
-    return map(double, l)
+    return list(map(double, l))
 
 
 def better_add_weight_to_list(l, weight):
@@ -212,7 +210,7 @@ def better_add_weight_to_list(l, weight):
 
     # this function applies the function `apply_weight`
     # to each element of l
-    return map(apply_weight, l)
+    return list(map(apply_weight, l))
 
 
 def better_is_0_dummy(l):
@@ -229,7 +227,7 @@ def better_is_0_dummy(l):
 
     # this function applies the function `gen_is_zero_dummy`
     # to each element of l
-    return map(gen_is_zero_dummy, l)
+    return list(map(gen_is_zero_dummy, l))
 
 
 def better_is_northeast_dummy(location_list):
@@ -251,7 +249,7 @@ def better_is_northeast_dummy(location_list):
     # to each element of l
     # notice that you cannot put parenthesis after `double`
     # since that will invoke the function, but not send the function in as input
-    return map(gen_is_northeast_dummy, location_list)
+    return list(map(gen_is_northeast_dummy, location_list))
 
 
 #######################################
@@ -265,7 +263,6 @@ def even_better_double_list(l):
 
     >>> even_better_double_list([1, 2, 3])
     [2, 4, 6]
-
     >>> even_better_double_list([-2, 0, 1.3])
     [-4, 0, 2.6]
 
@@ -274,7 +271,7 @@ def even_better_double_list(l):
     # the `lambda n: 2*n` is called a "lambda expression"
     # the `n` is the input, and the `2 * n` is the return
     # `lambda n: 2*n` is exactly the same as the `double` function in the previous implementation
-    return map(lambda n: 2 * n, l)
+    return list(map(lambda n: 2 * n, l))
 
 
 def even_better_add_weight_to_list(l, weight):
@@ -286,7 +283,7 @@ def even_better_add_weight_to_list(l, weight):
     # the `lambda n: weight * n` defines a function where
     # the `n` is the input, and the `weight * n` is the return
     # `lambda n: weight * n` is exactly the same as the `apply_weight` function in the previous implementation
-    return map(lambda n: weight * n, l)
+    return list(map(lambda n: weight * n, l))
 
 
 def even_better_is_0_dummy(l):
@@ -300,7 +297,7 @@ def even_better_is_0_dummy(l):
     # the `lambda n: n == 0` defines a function where
     # the `n` is the input, and the `n == 0` is the return
     # `lambda n: n == 0` is exactly the same as the `gen_is_zero_dummy` function in the previous implementation
-    return map(lambda n: n == 0, l)
+    return list(map(lambda n: n == 0, l))
 
 
 def even_better_is_northeast_dummy(location_list):
@@ -318,7 +315,7 @@ def even_better_is_northeast_dummy(location_list):
     # the `loc` is the input, and the `1 if loc == "northeast" else 0` is the return
     # `lambda loc: 1 if loc == "northeast" else 0` is exactly the same as
     #  the `gen_is_northeast_dummy` function in the previous implementation
-    return map(lambda loc: 1 if loc == "northeast" else 0, location_list)
+    return list(map(lambda loc: 1 if loc == "northeast" else 0, location_list))
 
 
 #######################################
@@ -327,12 +324,14 @@ def even_better_is_northeast_dummy(location_list):
 # therefore python nicely provided us a syntactic sugar for `map` called list comprehension
 # (list comprehension is actually more powerful than map)
 
+# NOTICE: although list comprehension looks like a for loop,
+# but list comprehension is "pure", in that it does not mutate any inputs.
+
 def good_double_list(l):
     """ Doubling every element in the input list l
 
     >>> good_double_list([1, 2, 3])
     [2, 4, 6]
-
     >>> good_double_list([-2, 0, 1.3])
     [-4, 0, 2.6]
 
@@ -375,7 +374,7 @@ def good_is_northeast_dummy(location_list):
     # notice you don't need the parentheses
     # `[1 if loc == "northeastern" else 0 for loc in location_list]`
     # will also work.
-    return [(1 if loc == "northeastern" else 0) for loc in location_list]
+    return [(1 if loc == "northeast" else 0) for loc in location_list]
 
 
 def nested_list_comprehension():
@@ -401,7 +400,6 @@ def bad_sum_list(int_lst):
 
     >>> bad_sum_list([1, 2, 3])
     6
-
     >>> bad_sum_list([1, 1, 1])
     3
 
@@ -420,7 +418,6 @@ def bad_prod_list(int_lst):
 
     >>> bad_prod_list([1, 2, 4])
     8
-
     >>> bad_prod_list([2, 3, 4])
     24
 
@@ -476,7 +473,6 @@ def sum_list(int_lst):
 
     >>> sum_list([1, 2, 3])
     6
-
     >>> sum_list([1, 1, 1])
     3
 
@@ -498,7 +494,6 @@ def prod_list(int_lst):
 
     >>> prod_list([1, 2, 4])
     8
-
     >>> prod_list([2, 3, 4])
     24
 
@@ -563,3 +558,24 @@ def my_map_using_fold(func, lst):
         # perform the previous operation on the input list
         lst=lst
     )
+
+#########################################################
+# FINAL COMMENT:
+# List comprehension, which are sugar for `map` and `filter` (will see in excercise) function,
+# is the most important construct to work with list.
+# `map` gives you a way to perform operation on list element safely and clearly
+# `filter` provides you a way to discard unwanted elements. 
+# Both functions are very important (and almost all you need) to process collective data.
+# And processing collective data is one of the most important topics in programming, 
+# since the reason to program is to automate huge amount of task that human cannot perform.
+#
+# foldl is super powerful, useful, and efficient.
+# But due to its unreadablity, is rarely used in real-world programming,
+# but are heavily used in library implementation, since it is consice and efficient.
+# We are not concerned about library implementation, therefore we will only use foldl for excercises.
+
+
+if __name__ == '__main__':
+    # test if the examples in the documentation work
+    import doctest
+    doctest.testmod()
